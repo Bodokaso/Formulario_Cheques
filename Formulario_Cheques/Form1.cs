@@ -21,7 +21,7 @@ namespace Formulario_Cheques
         private SQLiteCommand sqlCmd;
         private DataTable sqlDT = new DataTable();
         private DataSet DS = new DataSet();
-        private SQLiteDataAdapter DB; 
+        private SQLiteDataAdapter DB;
         public Form1()
         {
             InitializeComponent();
@@ -94,10 +94,17 @@ namespace Formulario_Cheques
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string QueryData ="insert or ignore into cheque(num_cheque, concepto_pago, id_cliente, monto_num, monto_letras, factura_pagada, fecha_pago)" +
+            string QueryData = "insert or ignore into cheque(num_cheque, concepto_pago, id_cliente, monto_num, monto_letras, factura_pagada, fecha_pago)" +
                 "values ('" + txtNumCheque.Text + "','" + txtConceptoPago.Text + "','" + txtIdCliente.Text + "','" + txtMontoNum.Text + "','" + txtMontoLetras.Text + "','" + txtFacturaPagada.Text + "','" + dateTimePicker1.Text + "')";
             ExecuteQquery(QueryData);
             upLoadData();
+        
+        
+            foreach (Control txt in panel3.Controls)
+                {
+                    if (txt is TextBox)
+                        ((TextBox)txt).Clear();
+                }
         }
     }
 }
