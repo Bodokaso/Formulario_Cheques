@@ -9,7 +9,7 @@ namespace Formulario_Cheques.Context.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Cheque> builder)
         {
-            builder.ToTable("Cheque");
+            builder.ToTable("Cheques");
             builder.HasKey(x => x.Id);
         }
     }

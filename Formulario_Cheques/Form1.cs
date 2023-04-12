@@ -20,97 +20,22 @@ namespace Formulario_Cheques
     public partial class Form1 : Form
     {
         private ChequeContext _context;
-        private SQLiteConnection sqlConn;
-        private SQLiteCommand sqlCmd;
-        private DataTable sqlDT = new DataTable();
-        private DataSet DS = new DataSet();
-        private SQLiteDataAdapter DB;
         public Form1()
         {
             _context = new ChequeContext();
             InitializeComponent();
-            //upLoadData();
-        }
-
-        private void SetConnectDB()
-        {
-            //"Data Source = C:\\Users\\bodok\\source\\repos\\Formulario_Cheques\\Formulario_Cheques\\bin\\Debug\\cheques_db.db"
-            string path = Path.Combine($"Data Source ={Environment.CurrentDirectory}", "cheques_db.db");
-            sqlConn = new SQLiteConnection(path);
-        }
-
-        private void ExecuteQquery(string QueryData)
-        {
-           // SetConnectDB();
-            sqlConn.Open();
-            sqlCmd = sqlConn.CreateCommand();
-            sqlCmd.CommandText = QueryData;
-            sqlCmd.ExecuteNonQuery();
-            sqlCmd.Dispose();
-            sqlConn.Close();
-
-        }
-
-        //private void upLoadData()
-        //{
-        //    SetConnectDB();
-        //    sqlConn.Open();
-        //    sqlCmd = sqlConn.CreateCommand();
-        //    string CommandText = "Select * from cheque";
-        //    DB = new SQLiteDataAdapter(CommandText, sqlConn);
-        //    DS.Reset();
-        //    DB.Fill(DS);
-        //    sqlConn.Close();
-        //}
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            //string QueryData = "insert or ignore into cheque(num_cheque, concepto_pago, id_cliente, monto_num, monto_letras, factura_pagada, fecha_pago)" +
-            //    "values ('" + txtNumCheque.Text + "','" + txtConceptoPago.Text + "','" + txtIdCliente.Text + "','" + txtMontoNum.Text + "','" + txtMontoLetras.Text + "','" + txtFacturaPagada.Text + "','" + dateTimePicker1.Text + "')";
-            //ExecuteQquery(QueryData);
-            //upLoadData();
-
             var chequeData = new Cheque()
             {
                 ConceptoPago = txtConceptoPago.Text,
-                FechaPago = new DateTime(),
+                FechaPago = dpFechaPago.Value,
                 Monto = Convert.ToDouble(txtMontoNum.Text),
-                MontoLetra = txtMontoLetras.Text
+                MontoLetra = txtMontoLetras.Text,
+                NombreCliente = txtNombreCliente.Text,
+                IdentificacionCliente = txtIdentificacionCliente.Text
             };
 
             _context.Add(chequeData);
@@ -129,6 +54,16 @@ namespace Formulario_Cheques
             // abrir form consulta
             ConsultaForm consultaForm = new ConsultaForm();
             consultaForm.ShowDialog();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

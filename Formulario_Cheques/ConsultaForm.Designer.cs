@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtNoCheque = new System.Windows.Forms.TextBox();
+            this.txtIdentificacionCliente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnConsulta = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // txtNoCheque
+            // txtIdentificacionCliente
             // 
-            this.txtNoCheque.Location = new System.Drawing.Point(67, 93);
-            this.txtNoCheque.Name = "txtNoCheque";
-            this.txtNoCheque.Size = new System.Drawing.Size(313, 22);
-            this.txtNoCheque.TabIndex = 0;
+            this.txtIdentificacionCliente.Location = new System.Drawing.Point(67, 93);
+            this.txtIdentificacionCliente.Name = "txtIdentificacionCliente";
+            this.txtIdentificacionCliente.Size = new System.Drawing.Size(313, 22);
+            this.txtIdentificacionCliente.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(64, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 16);
+            this.label1.Size = new System.Drawing.Size(129, 16);
             this.label1.TabIndex = 1;
-            this.label1.Text = "No. Cheque";
+            this.label1.Text = "Identificacion Cliente";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnConsulta
@@ -75,7 +75,7 @@
             this.ClientSize = new System.Drawing.Size(474, 263);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnConsulta);
-            this.Controls.Add(this.txtNoCheque);
+            this.Controls.Add(this.txtIdentificacionCliente);
             this.Controls.Add(this.panel1);
             this.Name = "ConsultaForm";
             this.Text = "ConsultaForm";
@@ -86,7 +86,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtNoCheque;
+        private System.Windows.Forms.TextBox txtIdentificacionCliente;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnConsulta;
         private System.Windows.Forms.Panel panel1;
