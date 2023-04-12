@@ -11,12 +11,14 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Collections;
 using System.IO;
+using Formulario_Cheques.Context;
+using Formulario_Cheques.Context.Models;
 
 namespace Formulario_Cheques
 {
     public partial class Form1 : Form
     {
-
+        private ChequeContext _context;
         private SQLiteConnection sqlConn;
         private SQLiteCommand sqlCmd;
         private DataTable sqlDT = new DataTable();
@@ -24,8 +26,9 @@ namespace Formulario_Cheques
         private SQLiteDataAdapter DB;
         public Form1()
         {
+            _context = new ChequeContext();
             InitializeComponent();
-            upLoadData();
+            //upLoadData();
         }
 
         private void SetConnectDB()
@@ -37,7 +40,7 @@ namespace Formulario_Cheques
 
         private void ExecuteQquery(string QueryData)
         {
-            SetConnectDB();
+           // SetConnectDB();
             sqlConn.Open();
             sqlCmd = sqlConn.CreateCommand();
             sqlCmd.CommandText = QueryData;
@@ -47,17 +50,17 @@ namespace Formulario_Cheques
 
         }
 
-        private void upLoadData()
-        {
-            SetConnectDB();
-            sqlConn.Open();
-            sqlCmd = sqlConn.CreateCommand();
-            string CommandText = "Select * from cheque";
-            DB = new SQLiteDataAdapter(CommandText, sqlConn);
-            DS.Reset();
-            DB.Fill(DS);
-            sqlConn.Close();
-        }
+        //private void upLoadData()
+        //{
+        //    SetConnectDB();
+        //    sqlConn.Open();
+        //    sqlCmd = sqlConn.CreateCommand();
+        //    string CommandText = "Select * from cheque";
+        //    DB = new SQLiteDataAdapter(CommandText, sqlConn);
+        //    DS.Reset();
+        //    DB.Fill(DS);
+        //    sqlConn.Close();
+        //}
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -96,10 +99,21 @@ namespace Formulario_Cheques
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string QueryData = "insert or ignore into cheque(num_cheque, concepto_pago, id_cliente, monto_num, monto_letras, factura_pagada, fecha_pago)" +
-                "values ('" + txtNumCheque.Text + "','" + txtConceptoPago.Text + "','" + txtIdCliente.Text + "','" + txtMontoNum.Text + "','" + txtMontoLetras.Text + "','" + txtFacturaPagada.Text + "','" + dateTimePicker1.Text + "')";
-            ExecuteQquery(QueryData);
-            upLoadData();
+            //string QueryData = "insert or ignore into cheque(num_cheque, concepto_pago, id_cliente, monto_num, monto_letras, factura_pagada, fecha_pago)" +
+            //    "values ('" + txtNumCheque.Text + "','" + txtConceptoPago.Text + "','" + txtIdCliente.Text + "','" + txtMontoNum.Text + "','" + txtMontoLetras.Text + "','" + txtFacturaPagada.Text + "','" + dateTimePicker1.Text + "')";
+            //ExecuteQquery(QueryData);
+            //upLoadData();
+
+            var chequeData = new Cheque()
+            {
+                ConceptoPago = txtConceptoPago.Text,
+                FechaPago = new DateTime(),
+                Monto = Convert.ToDouble(txtMontoNum.Text),
+                MontoLetra = txtMontoLetras.Text
+            };
+
+            _context.Add(chequeData);
+            _context.SaveChanges(); 
         
         
             foreach (Control txt in panel3.Controls)
