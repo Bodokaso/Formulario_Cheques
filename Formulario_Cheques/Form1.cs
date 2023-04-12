@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Collections;
-
+using System.IO;
 
 namespace Formulario_Cheques
 {
@@ -30,7 +30,9 @@ namespace Formulario_Cheques
 
         private void SetConnectDB()
         {
-            sqlConn = new SQLiteConnection("Data Source = C:\\Users\\bodok\\source\\repos\\Formulario_Cheques\\Formulario_Cheques\\bin\\Debug\\cheques_db.db");
+            //"Data Source = C:\\Users\\bodok\\source\\repos\\Formulario_Cheques\\Formulario_Cheques\\bin\\Debug\\cheques_db.db"
+            string path = Path.Combine($"Data Source ={Environment.CurrentDirectory}", "cheques_db.db");
+            sqlConn = new SQLiteConnection(path);
         }
 
         private void ExecuteQquery(string QueryData)
@@ -105,6 +107,13 @@ namespace Formulario_Cheques
                     if (txt is TextBox)
                         ((TextBox)txt).Clear();
                 }
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            // abrir form consulta
+            ConsultaForm consultaForm = new ConsultaForm();
+            consultaForm.ShowDialog();
         }
     }
 }
